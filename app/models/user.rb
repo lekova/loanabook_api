@@ -11,7 +11,6 @@ class User < ActiveRecord::Base
     user.token if user
   end
 
-  private
   def set_token
     self.token = SecureRandom.hex
   end
