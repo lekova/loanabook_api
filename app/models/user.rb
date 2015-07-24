@@ -11,6 +11,12 @@ class User < ActiveRecord::Base
     user.token if user
   end
 
+  def login(password)
+    # authenticate method is defined through has_secure_password
+    authenticate(password) && set_token && save! && token
+  end
+
+  private
   def set_token
     self.token = SecureRandom.hex
   end
