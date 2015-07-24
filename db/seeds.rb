@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+%w(pina jony gruds splica).each do |name|
+  email = "#{name}@#{name}.com"
+  next if User.exists? email: email
+  User.create!(email: email, password: "1234", password_confirmation: "1234")
+end
