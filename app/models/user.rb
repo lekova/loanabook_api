@@ -4,6 +4,14 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
+  has_many :loaner_loans, class_name:  "Loan",
+                          foreign_key: "loaner_id",
+                          dependent:   :destroy
+
+  has_many :borrower_loans, class_name:  "Loan",
+                            foreign_key: "borrower_id",
+                            dependent:   :destroy
+
   def self.login(email, password)
     user = find_by email: email
     user.login password if user
