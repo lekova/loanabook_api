@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
                             foreign_key: "borrower_id",
                             dependent:   :destroy
 
-  has_many :user_one_onversations, class_name:  "Loan",
+  has_many :user_one_onversations, class_name:  "Conversation",
                           foreign_key: "user_one_id",
                           dependent: :destroy
 
