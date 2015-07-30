@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20150730002504) do
   end
 
   add_index "loans", ["borrower_id"], name: "index_loans_on_borrower_id", using: :btree
-  add_index "loans", ["loaner_id", "borrower_id"], name: "index_loans_on_loaner_id_and_borrower_id", unique: true, using: :btree
   add_index "loans", ["loaner_id"], name: "index_loans_on_loaner_id", using: :btree
 
   create_table "messages", force: :cascade do |t|

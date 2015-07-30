@@ -11,6 +11,5 @@ class CreateLoans < ActiveRecord::Migration
 
     add_index :loans, :loaner_id
     add_index :loans, :borrower_id
-    add_index :loans, [:loaner_id, :borrower_id], unique: true
   end
 end
