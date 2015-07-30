@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
                                    foreign_key: "user_two_id",
                                    dependent: :destroy
 
-  has_namy :messages
+  has_many :messages, foreign_key: "sender_id"
   has_many :books
 
   def self.login(email, password)
