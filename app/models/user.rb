@@ -12,6 +12,17 @@ class User < ActiveRecord::Base
                             foreign_key: "borrower_id",
                             dependent:   :destroy
 
+  has_many :user_one_onversations, class_name:  "Loan",
+                          foreign_key: "user_one_id",
+                          dependent: :destroy
+
+  has_many :user_two_conversations, class_name: "Conversation",
+                                   foreign_key: "user_two_id",
+                                   dependent: :destroy
+
+  has_namy :messages
+  has_many :books
+
   def self.login(email, password)
     user = find_by email: email
     user.login password if user
