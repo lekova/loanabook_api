@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20150730002404) do
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   add_foreign_key "books", "users"
-  add_foreign_key "loans", "users", column: "borrower_id"
-  add_foreign_key "loans", "users", column: "loaner_id"
+  add_foreign_key "loans", "users", column: "borrower_id", on_delete: :cascade
+  add_foreign_key "loans", "users", column: "loaner_id", on_delete: :cascade
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
 end
