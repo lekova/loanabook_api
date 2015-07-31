@@ -11,7 +11,7 @@ class CreateLoans < ActiveRecord::Migration
 
     add_index :loans, :loaner_id
     add_index :loans, :borrower_id
-    add_foreign_key :loans, :users, column: :loaner_id
-    add_foreign_key :loans, :users, column: :borrower_id
+    add_foreign_key :loans, :users, column: :loaner_id, on_delete: :cascade
+    add_foreign_key :loans, :users, column: :borrower_id, on_delete: :cascade
   end
 end

@@ -1,4 +1,4 @@
-class BooksController < ApllicationController
+class BooksController < ApplicationController
   def index
     render json: Books.all
   end
@@ -8,7 +8,8 @@ class BooksController < ApllicationController
   end
 
   def create
-    book = book.create(book_params)
+    book = current_user.books.new(book_params)
+    # book = book.create(book_params)
     if book.save
       head :created, location: book
     else
@@ -32,6 +33,6 @@ class BooksController < ApllicationController
 
   private
   def book_params
-    params.require(:book).permit(:title, :author, :year, :price)
+    params.require(:book).permit(:id, :owner_id, :title, :author, :year, :price)
   end
 end
