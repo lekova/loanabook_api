@@ -17,17 +17,18 @@ ActiveRecord::Schema.define(version: 20150730002404) do
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "owner_id"
     t.string   "title",      null: false
     t.string   "author",     null: false
     t.integer  "year"
     t.decimal  "price"
     t.text     "url"
+    t.integer  "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "books", ["user_id"], name: "index_books_on_user_id", using: :btree
+  add_index "books", ["owner_id"], name: "index_books_on_owner_id", using: :btree
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "user_one"
@@ -72,7 +73,7 @@ ActiveRecord::Schema.define(version: 20150730002404) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
-  add_foreign_key "books", "users"
+  add_foreign_key "books", "users", column: "owner_id"
   add_foreign_key "loans", "users", column: "borrower_id", on_delete: :cascade
   add_foreign_key "loans", "users", column: "loaner_id", on_delete: :cascade
   add_foreign_key "messages", "conversations"
