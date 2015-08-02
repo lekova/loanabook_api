@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
                                    dependent: :destroy
 
   has_many :messages, foreign_key: "sender_id"
-  has_many :books
+  has_many :books, foreign_key: "owner_id"
 
   def self.login(email, password)
     user = find_by email: email
