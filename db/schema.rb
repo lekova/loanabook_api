@@ -18,14 +18,14 @@ ActiveRecord::Schema.define(version: 20150730002404) do
 
   create_table "books", force: :cascade do |t|
     t.integer  "owner_id"
-    t.string   "title",      null: false
-    t.string   "author",     null: false
+    t.string   "title",                  null: false
+    t.string   "author",                 null: false
     t.integer  "year"
     t.decimal  "price"
     t.text     "url"
-    t.integer  "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "books", ["owner_id"], name: "index_books_on_owner_id", using: :btree

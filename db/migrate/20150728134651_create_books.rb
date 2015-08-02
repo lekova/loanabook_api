@@ -7,7 +7,7 @@ class CreateBooks < ActiveRecord::Migration
       t.integer :year
       t.decimal :price
       t.text :url
-      t.integer :status
+      t.integer :status, default: 0
       t.foreign_key :users, :column => :owner_id, :dependent => :delete
 
       t.timestamps null: false
