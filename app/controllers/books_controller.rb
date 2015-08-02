@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-    render json: Books.all
+    render json: Book.all
   end
 
   def show
@@ -8,10 +8,9 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = current_user.books.new(book_params)
-    # book = book.create(book_params)
-    if book.save
-      head :created, location: book
+    book = Book.create(book_params_with_user_id)
+    if book.save!
+      render json: book
     else
       render json: book.errors, status: :unprocessable_entity
     end
@@ -33,6 +32,13 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:id, :owner_id, :title, :author, :year, :price)
+    params.require(:book).permit(:id, :title, :author, :year, :price, :url, :status)
+  end
+
+  def book_params_with_user_id
+    current_params = book_params
+    current_params["owner_id"] = current_user.id
+    current_params["status"] = 0
+    current_params
   end
 end
