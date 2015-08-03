@@ -1,10 +1,21 @@
-class BooksController < ApplicationController
+class BooksController < OpenReadController
+
   def index
-    render json: Book.all.order('id ASC')
+    if params[:limit]
+      books = current_user ? current_user.books : []
+    else
+      books = Book.all.order('id ASC')
+    end
+
+    render json: books
   end
 
   def show
     render json: Book.find(params[:id]).order('id ASC')
+  end
+
+  def show_my_books
+    render json: Book.find_by(book_params_with_user_id["owner_id"])
   end
 
   def create
