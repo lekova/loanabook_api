@@ -43,6 +43,7 @@ class BooksController < OpenReadController
 
   private
   def book_params
+    # TODO add summary
     params.require(:book).permit(:id, :title, :author, :year, :price, :url, :status)
   end
 
