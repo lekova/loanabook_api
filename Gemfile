@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 
 gem 'rails-api'
 
@@ -15,7 +15,7 @@ gem 'active_model_serializers'
 
 gem 'rack-cors', :require => 'rack/cors'
 
-gem 'twilio-ruby', '~> 4.2.1'
+# gem 'twilio-ruby', '~> 4.2.1'
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 
