@@ -40,12 +40,14 @@ ActiveRecord::Schema.define(version: 20150730002404) do
   create_table "loans", force: :cascade do |t|
     t.integer  "loaner_id",     null: false
     t.integer  "borrower_id",   null: false
+    t.integer  "book_id",       null: false
     t.string   "date_loaned",   null: false
     t.integer  "loan_duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
+  add_index "loans", ["book_id"], name: "index_loans_on_book_id", using: :btree
   add_index "loans", ["borrower_id"], name: "index_loans_on_borrower_id", using: :btree
   add_index "loans", ["loaner_id"], name: "index_loans_on_loaner_id", using: :btree
 
@@ -74,6 +76,7 @@ ActiveRecord::Schema.define(version: 20150730002404) do
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   add_foreign_key "books", "users", column: "owner_id"
+  add_foreign_key "loans", "books", on_delete: :cascade
   add_foreign_key "loans", "users", column: "borrower_id", on_delete: :cascade
   add_foreign_key "loans", "users", column: "loaner_id", on_delete: :cascade
   add_foreign_key "messages", "conversations"
