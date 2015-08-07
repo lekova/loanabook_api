@@ -9,7 +9,7 @@ class LoansController < ApplicationController
   end
 
   def show
-    render json: Loan.find(params[:id]).order('id ASC')
+    render json: Loan.find(params[:id])
   end
 
   def show_my_loans
@@ -17,6 +17,7 @@ class LoansController < ApplicationController
   end
 
   def create
+    byebug
     loan = Loan.create(loan_params_with_user_id)
     if loan.save!
       render json: loan
@@ -41,12 +42,12 @@ class LoansController < ApplicationController
 
   private
   def loan_params
-    params.require(:loan).permit(:id, :loaner_id, :borrower_id, :date_loaned, :loan_duration, :book_id)
+    params.require(:loan).permit(:id, :borrower_id, :book_id, :date_loaned, :loan_duration)
   end
 
   def loan_params_with_user_id
     current_params = loan_params
-    current_params["owner_id"] = current_user.id
+    current_params["loaner_id"] = current_user.id
     current_params
   end
 end
