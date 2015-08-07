@@ -11,7 +11,7 @@ class BooksController < OpenReadController
   end
 
   def show
-    render json: Book.find(params[:id]).order('id ASC')
+    render json: Book.find(params[:id])
   end
 
   def show_my_books
