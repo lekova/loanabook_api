@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
   post '/login' => 'users#login'
+  get '/books/loaned' => 'books#loaned_books'
+  get '/books/borrowed' => 'books#borrowed_books'
 
   resources :users, except: [:new, :edit]
-  resources :books, :loans
+  resources :books
+  resources :loans
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
