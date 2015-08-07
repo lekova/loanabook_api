@@ -14,6 +14,14 @@ class BooksController < OpenReadController
     render json: Book.find(params[:id])
   end
 
+  def loaned_books
+    render json: current_user.loaned_books
+  end
+
+  def borrowed_books
+    render json: current_user.borrowed_books
+  end
+
   def show_my_books
     render json: Book.find_by(book_params_with_user_id["owner_id"])
   end
@@ -44,7 +52,7 @@ class BooksController < OpenReadController
   private
   def book_params
     # TODO add summary
-    params.require(:book).permit(:title, :author, :year, :price, :url, :status)
+    params.require(:book).permit(:id, :title, :author, :year, :price, :url, :status, :image)
   end
 
   def book_params_with_user_id
