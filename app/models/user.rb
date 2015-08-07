@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
                           foreign_key: "loaner_id",
                           dependent:   :destroy
 
+  has_many :loaned_books, through: :loaner_loans, source: :book
+  has_many :borrowed_books, through: :borrower_loans, source: :book
+
   has_many :loaners, through: :loaner_loans, source: :borrower
 
   has_many :borrower_loans, class_name:  "Loan",
